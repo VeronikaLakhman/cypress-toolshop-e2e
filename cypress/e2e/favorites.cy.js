@@ -8,7 +8,6 @@ describe('Favorites', () => {
   it('should add a product to favorites only once', () => {
     const productName = catalogData.products.slipJointPliers;
 
-    // Sign in
     cy.env([
       'REGULAR_USER_1_EMAIL',
       'REGULAR_USER_1_PASSWORD',
@@ -24,15 +23,12 @@ describe('Favorites', () => {
     FavoritesPage.removeProduct(productName);
     FavoritesPage.assertProductCount(productName, 0);
 
-    // Find and open the product
     HomePage.open();
     HomePage.searchProduct(productName);
     HomePage.openProduct(productName);
 
-    // Add to favorites
     ProductPage.addToFavorites();
 
-    // Verify the product appears only once
     FavoritesPage.open();
     FavoritesPage.assertProductCount(productName, 1);
   });
